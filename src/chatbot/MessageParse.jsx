@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 const MessageParser = ({ children, actions }) => {
   const parse = (message) => {
-    console.log(message);
+    if (message.includes('hello')) {
+      actions.handleHello();
+    }
   };
 
   return (
@@ -12,7 +14,7 @@ const MessageParser = ({ children, actions }) => {
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           parse: parse,
-          actions: {},
+          actions,
         });
       })}
     </div>
@@ -23,4 +25,5 @@ export default MessageParser;
 
 MessageParser.propTypes = {
   children: PropTypes.node.isRequired,
+  actions: PropTypes.node.isRequired,
 }
