@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 
 const MessageParser = ({ children, actions }) => {
   const parse = (message) => {
-    if (message.includes('hello')) {
-      actions.handleHello();
+    message = message.toLowerCase();
+    const keywords = ['hello', 'goodbye', 'good', 'i want'];
+    if (keywords.some(keyword => message.includes(keyword))) {
+      actions.handleUsername();
+    }
+    
+    else {
+      actions.handleUsername();
     }
   };
 

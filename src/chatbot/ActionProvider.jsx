@@ -4,11 +4,40 @@ import PropTypes from 'prop-types';
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleHello = () => {
-    const botMessage = createChatBotMessage('Hello. Nice to meet you.');
+    // insert a random message
+    const botHelloMessage = createChatBotMessage('Hello. Nice to meet you.');
+    
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botHelloMessage],
+    }));
+  };
+
+  const handleUsername = () => {
+    const botUsernameMessage = createChatBotMessage('To start our conversation, first tell me your Username:')
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage],
+      messages: [...prev.messages,
+      botUsernameMessage],
+    }));
+  };
+
+  const handlePassword = () => {
+    const botPasswordMessage = createChatBotMessage('Now, tell me your Password:')
+
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botPasswordMessage],
+    }));
+  };
+
+  const handleComentarios = () => {
+    const botPasswordMessage = createChatBotMessage('Now, tell me your Password:')
+
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botPasswordMessage],
     }));
   };
 
@@ -18,6 +47,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
         return React.cloneElement(child, {
           actions: {
             handleHello,
+            handleUsername,
+            handlePassword,
+            handleComentarios,
           },
         });
       })}
