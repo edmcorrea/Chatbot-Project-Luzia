@@ -14,12 +14,18 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleUsername = () => {
-    const botUsernameMessage = createChatBotMessage('To start our conversation, first tell me your Username:')
+    const botUsernameMessage = createChatBotMessage('Hello! To start our conversation, first tell me your Username:');
 
     setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages,
-      botUsernameMessage],
+      ...prev, messages: [...prev.messages, botUsernameMessage],
+    }));
+  };
+
+  const handleLoginInvalid = (loginElement) => {
+    const botPasswordMessage = createChatBotMessage(`${loginElement} Invalid. Please try again`)
+
+    setState((prev) => ({
+      ...prev, messages: [...prev.messages, botPasswordMessage],
     }));
   };
 
@@ -27,13 +33,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const botPasswordMessage = createChatBotMessage('Now, tell me your Password:')
 
     setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botPasswordMessage],
+      ...prev, messages: [...prev.messages, botPasswordMessage],
     }));
   };
 
-  const handleComentarios = () => {
-    const botPasswordMessage = createChatBotMessage('Now, tell me your Password:')
+  const handleLoginSucess = () => {
+    const botPasswordMessage = createChatBotMessage('Login Sucess! What do you need?')
 
     setState((prev) => ({
       ...prev,
@@ -48,8 +53,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
           actions: {
             handleHello,
             handleUsername,
+            handleLoginInvalid,
             handlePassword,
-            handleComentarios,
+            handleLoginSucess,
           },
         });
       })}

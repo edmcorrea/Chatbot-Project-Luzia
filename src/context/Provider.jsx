@@ -11,10 +11,14 @@ function Provider({ children }) {
     Password: '',
   });
   
-  const isLoginValid = (element, validation) => element.length >= validation;
+  const isLoginValid = (element) => {
+    if(!Data.Username) return element.length >= UsernameChars;
+    else return element.length >= PasswordChars;
+  }
 
   useEffect(() => {
     const { Username, Password } = Data;
+    console.log(Data);
 
     if (
       isLoginValid(Username, UsernameChars) &&
@@ -39,13 +43,14 @@ function Provider({ children }) {
     setData,
     loginStatus,
     setLoginStatus,
+    isLoginValid,
     handleChange,
   }), [
     Data,
     loginStatus,
   ]);
 
-  return <Context.Provider value={ context }>{children}</Context.Provider>;
+  return <Context.Provider value={ context }>{children}</Context.Provider>
 }
 export default Provider;
 
