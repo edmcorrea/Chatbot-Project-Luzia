@@ -1,5 +1,5 @@
 import Chatbot from 'react-chatbot-kit'
-import config from './chatbot/config.js';
+import config from './chatbot/config.jsx';
 import 'react-chatbot-kit/build/main.css'
 import './App.css'
 import MessageParser from './chatbot/MessageParse.jsx';

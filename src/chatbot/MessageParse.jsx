@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
@@ -6,7 +6,6 @@ import Context from '../context/Context';
 const MessageParser = ({ children, actions }) => {
   const { loginStatus, setLoginStatus, setData, Data, isLoginValid } = useContext(Context);
   const { Username, Password } = Data;
-  useEffect(() => console.log(Data), [Data]);
 
   const parse = (message) => {
     message = message.toLowerCase();
@@ -15,6 +14,8 @@ const MessageParser = ({ children, actions }) => {
     if (keywords.some(keyword => message.includes(keyword))) {
       return actions.handleUsername();
     }
+
+    // implementation future: condition that the user say something that the chatbot dont know
 
     if(!loginStatus) {
       if(isLoginValid(message) && !Username) {
@@ -38,6 +39,10 @@ const MessageParser = ({ children, actions }) => {
         setLoginStatus(true);
         return actions.handleLoginSucess()
       }
+    }
+
+    if (message.includes('loan')) {
+      actions.handleLoan();
     }
   };
 

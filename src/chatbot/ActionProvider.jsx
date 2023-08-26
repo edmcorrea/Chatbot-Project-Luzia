@@ -36,6 +36,20 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
+  const handleLoan = () => {
+    const botMessage = createChatBotMessage(
+      "Here's a nice dog picture for you!",
+      {
+        widget: 'optionsLoan',
+      }
+    );
+
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
   return (
     <div>
       {React.Children.map(children, (child) => {
@@ -45,6 +59,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleLoginInvalid,
             handlePassword,
             handleLoginSucess,
+            handleLoan,
           },
         });
       })}
