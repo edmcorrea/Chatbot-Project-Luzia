@@ -38,7 +38,6 @@ const MessageParser = ({ children, actions }) => {
         setLoginStatus(true);
         return actions.handleLoginSucess()
       }
-      
     }
   };
 

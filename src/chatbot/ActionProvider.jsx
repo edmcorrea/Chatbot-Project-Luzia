@@ -3,46 +3,36 @@ import PropTypes from 'prop-types';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
-  const handleHello = () => {
-    // insert a random message
-    const botHelloMessage = createChatBotMessage('Hello. Nice to meet you.');
-    
-    setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botHelloMessage],
-    }));
-  };
-
   const handleUsername = () => {
-    const botUsernameMessage = createChatBotMessage('Hello! To start our conversation, first tell me your Username:');
+    const botMessage = createChatBotMessage('To start our conversation, first tell me your Username:');
 
     setState((prev) => ({
-      ...prev, messages: [...prev.messages, botUsernameMessage],
+      ...prev, messages: [...prev.messages, botMessage],
     }));
   };
 
   const handleLoginInvalid = (loginElement) => {
-    const botPasswordMessage = createChatBotMessage(`${loginElement} Invalid. Please try again`)
+    const botMessage = createChatBotMessage(`${loginElement} Invalid. Please try again`)
 
     setState((prev) => ({
-      ...prev, messages: [...prev.messages, botPasswordMessage],
+      ...prev, messages: [...prev.messages, botMessage],
     }));
   };
 
   const handlePassword = () => {
-    const botPasswordMessage = createChatBotMessage('Now, tell me your Password:')
+    const botMessage = createChatBotMessage('Now, tell me your Password:')
 
     setState((prev) => ({
-      ...prev, messages: [...prev.messages, botPasswordMessage],
+      ...prev, messages: [...prev.messages, botMessage],
     }));
   };
 
   const handleLoginSucess = () => {
-    const botPasswordMessage = createChatBotMessage('Login Sucess! What do you need?')
+    const botMessage = createChatBotMessage('Login Sucess! What do you need?')
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botPasswordMessage],
+      messages: [...prev.messages, botMessage],
     }));
   };
 
@@ -51,7 +41,6 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           actions: {
-            handleHello,
             handleUsername,
             handleLoginInvalid,
             handlePassword,

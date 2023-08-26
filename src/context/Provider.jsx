@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Context from './Context';
 
 function Provider({ children }) {
@@ -11,32 +11,11 @@ function Provider({ children }) {
     Password: '',
   });
   
-  const isLoginValid = (element) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const isLoginValid = useCallback((element) => {
     if(!Data.Username) return element.length >= UsernameChars;
     else return element.length >= PasswordChars;
-  }
-
-  useEffect(() => {
-    const { Username, Password } = Data;
-    console.log(Data);
-
-    if (
-      isLoginValid(Username, UsernameChars) &&
-      isLoginValid(Password, PasswordChars)
-    ) {
-      setLoginStatus(true);
-    } else {
-      setLoginStatus(false);
-    }
-  }, [Data]);
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  })
 
   const context = useMemo(() => ({
     Data,
@@ -44,10 +23,10 @@ function Provider({ children }) {
     loginStatus,
     setLoginStatus,
     isLoginValid,
-    handleChange,
   }), [
     Data,
     loginStatus,
+    isLoginValid,
   ]);
 
   return <Context.Provider value={ context }>{children}</Context.Provider>
