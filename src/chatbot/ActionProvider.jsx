@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
 import PropTypes from 'prop-types';
+import { createClientMessage } from 'react-chatbot-kit';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
-  const { Data } = useContext(Context);
+  const { Data, setLoginStatus,setFirstContact, setData } = useContext(Context);
   const { Username } = Data;
 
   const handleKeyword = () => {
@@ -61,21 +62,38 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  // const handleLoanAnyMore = () => {
-  //   const botMessage = createChatBotMessage(
-  //     "Do you need anything else?",
-  //     {
-  //       widget: 'optionsLoanAnyMore',
-  //     }
-  //   );
+  const handleLoanOption = () => {
+    const clientMessage = createClientMessage('Return to loan options');
+    const botMessage = createChatBotMessage(
+      `${Username}, select one of the options so that we can help you better:`,
+      {
+        widget: 'optionsLoan',
+      }
+    );
 
-  //   setState((prev) => ({
-  //     ...prev,
-  //     messages: [...prev.messages, botMessage],
-  //   }));
-  // };
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, clientMessage, botMessage],
+    }));
+  };
+
+  const handleLoanAnyMore = () => {
+    const botMessage = createChatBotMessage(
+      "Do you need anything else?",
+      {
+        widget: 'optionsLoanAnyMore',
+      }
+    );
+
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
 
   const handleOptionApplyLoan = () => {
+    const clientMessage = createClientMessage('Do you want to apply for a loan?');
+
     const botMessage = createChatBotMessage(
       `Of course ${Username}, I'll be glad to assist you with information about loans! Understanding your financial options is important. Before we proceed, I suggest you take a look at this comprehensive guide on 'How to Choose the Right Loan for You.' It will provide valuable insights to help you make an informed decision.`,
     );
@@ -83,29 +101,29 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       <a href="https://www.investopedia.com/articles/personal-finance/010516/how-apply-personal-loan.asp" target="_blank" rel="noreferrer">How to Apply for a Personal Loan</a>
     );
 
-    const botMessage2 = createChatBotMessage("Do you need anything else?");
-
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage, botMessage1, botMessage2],
+      messages: [...prev.messages, clientMessage, botMessage, botMessage1],
     }));
   };
 
   const handleOptionConditionsLoan = () => {
+    const clientMessage = createClientMessage('Loan conditions');
+
     const botMessage = createChatBotMessage(
       `Of course ${Username}, I am here to provide you with detailed information about loan conditions. The terms of a loan can vary depending on the type of loan you are considering and the financial institution offering it. Conditions typically include information such as interest rate, payment term, loan amount, and credit requirements. To better understand the specific conditions, I recommend you visit the page below:`,
     );
     const botMessage1 = createChatBotMessage(<a href="https://www.investopedia.com/loan-terms-5075341" target="_blank" rel="noreferrer">Loan Conditions</a>);
 
-    const botMessage2 = createChatBotMessage("Do you need anything else?");
-
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage, botMessage1, botMessage2],
+      messages: [...prev.messages, clientMessage, botMessage, botMessage1],
     }));
   };
 
   const handleOptionHelpLoan = () => {
+    const clientMessage = createClientMessage('Help');
+
     const botMessage = createChatBotMessage(
       "Other ways we can help you:",
     );
@@ -114,11 +132,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
     const botMessage3 = createChatBotMessage(<a href="https://www.bankrate.com/loans/personal-loans/loan-borrower-fears/" target="_blank" rel="noreferrer">Scared to debt: 5 questions that loan borrowers fear</a>);
 
-    const botMessage4 = createChatBotMessage("Do you need anything else?");
-
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage, botMessage1, botMessage2, botMessage3, botMessage4],
+      messages: [...prev.messages, clientMessage, botMessage, botMessage1, botMessage2, botMessage3],
     }));
   };
 
@@ -129,6 +145,20 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  const handleGoodbyeOption = () => {
+    const clientMessage = createClientMessage('Goodbye');
+    setLoginStatus(false);
+    setFirstContact(false);
+    setData({ Username: '', Password: '' })
+    const botMessage = createChatBotMessage(
+      `Bye ${Username}! If you have further questions, please don't hesitate to ask.`);
+
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, clientMessage, botMessage],
     }));
   };
 
@@ -151,10 +181,13 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handlePassword,
             handleLoginSucess,
             handleLoan,
+            handleLoanOption,
+            handleLoanAnyMore,
             handleOptionApplyLoan,
             handleOptionConditionsLoan,
             handleOptionHelpLoan,
             handleGoodbye,
+            handleGoodbyeOption,
             handleNoAnswer
           },
         });

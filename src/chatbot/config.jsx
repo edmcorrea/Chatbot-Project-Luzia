@@ -1,5 +1,6 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
 import OptionsLoan from '../components/OptionsLoan';
+import OptionsLoanAnyMore from '../components/OptionsLoanAnyMore';
 
 const config = {
   initialMessages: [createChatBotMessage(`Hi! My name is Luzia. Let's talk!`)],
