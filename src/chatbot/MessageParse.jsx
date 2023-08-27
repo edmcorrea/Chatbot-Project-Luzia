@@ -17,6 +17,8 @@ const MessageParser = ({ children, actions }) => {
 
     // implementation future: condition that the user say something that the chatbot dont know
 
+    // DEPOIS QUE INSERI OS PROPTYPES A PAGINA WEB FICOU LENTA
+
     if(!loginStatus) {
       if(isLoginValid(message) && !Username) {
         setData((prevData) => ({
@@ -44,6 +46,10 @@ const MessageParser = ({ children, actions }) => {
     if (message.includes('loan')) {
       actions.handleLoan();
     }
+
+    if(loginStatus && message.includes('goodbye')) {
+      actions.handleGoodbye();
+    }
   };
 
   return (
@@ -60,7 +66,18 @@ const MessageParser = ({ children, actions }) => {
 
 export default MessageParser;
 
+
+// DEPOIS QUE INSERI OS PROPTYPES A PAGINA WEB FICOU LENTA
 MessageParser.propTypes = {
-  children: PropTypes.node.isRequired,
-  actions: PropTypes.node.isRequired,
+  children: PropTypes.shape({}).isRequired,
+  actions: PropTypes.shape({
+    handleOptionHelpLoan: PropTypes.func.isRequired,
+    handleUsername: PropTypes.func.isRequired,
+    handlePassword: PropTypes.func.isRequired,
+    handleLoginInvalid: PropTypes.func.isRequired,
+    handleLoginSucess: PropTypes.func.isRequired,
+    handleLoan: PropTypes.func.isRequired,
+    handleGoodbye: PropTypes.func.isRequired,
+  }),
 }
+
