@@ -6,16 +6,24 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const { Data } = useContext(Context);
   const { Username } = Data;
 
-  const handleUsername = () => {
-    const botMessage = createChatBotMessage('To start our conversation, first tell me your Username:');
+  const handleKeyword = () => {
+    const botMessage = createChatBotMessage("I can't understand what you say. To start the conversation, please say 'Hello', 'Good Morning', 'Good Afternoon', 'I want' or 'Goodbye'");
 
     setState((prev) => ({
       ...prev, messages: [...prev.messages, botMessage],
     }));
   };
 
-  const handleLoginInvalid = (loginElement) => {
-    const botMessage = createChatBotMessage(`${loginElement} Invalid. Please try again`)
+  const handleUsername = () => {
+    const botMessage = createChatBotMessage('Hello! Tell me your Username:');
+
+    setState((prev) => ({
+      ...prev, messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  const handleLoginInvalid = (loginElement, numChar) => {
+    const botMessage = createChatBotMessage(`${loginElement} Invalid. It must have at least ${numChar} characters. Please try again!`)
 
     setState((prev) => ({
       ...prev, messages: [...prev.messages, botMessage],
@@ -23,7 +31,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handlePassword = () => {
-    const botMessage = createChatBotMessage('Now, tell me your Password:')
+    const botMessage = createChatBotMessage('All right! Now, tell me your Password:')
 
     setState((prev) => ({
       ...prev, messages: [...prev.messages, botMessage],
@@ -31,7 +39,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleLoginSucess = () => {
-    const botMessage = createChatBotMessage('Login Sucess! What do you need?')
+    const botMessage = createChatBotMessage('Login Sucess! What do you need? I can talk about loan.')
 
     setState((prev) => ({
       ...prev,
@@ -52,6 +60,20 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       messages: [...prev.messages, botMessage],
     }));
   };
+
+  // const handleLoanAnyMore = () => {
+  //   const botMessage = createChatBotMessage(
+  //     "Do you need anything else?",
+  //     {
+  //       widget: 'optionsLoanAnyMore',
+  //     }
+  //   );
+
+  //   setState((prev) => ({
+  //     ...prev,
+  //     messages: [...prev.messages, botMessage],
+  //   }));
+  // };
 
   const handleOptionApplyLoan = () => {
     const botMessage = createChatBotMessage(
@@ -110,11 +132,20 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
+  const handleNoAnswer = () => {
+    const botMessage = createChatBotMessage("I don't understand what do you say. I only have knowledge about loan.");
+
+    setState((prev) => ({
+      ...prev, messages: [...prev.messages, botMessage],
+    }));
+  };
+
   return (
     <div>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           actions: {
+            handleKeyword,
             handleUsername,
             handleLoginInvalid,
             handlePassword,
@@ -123,7 +154,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleOptionApplyLoan,
             handleOptionConditionsLoan,
             handleOptionHelpLoan,
-            handleGoodbye
+            handleGoodbye,
+            handleNoAnswer
           },
         });
       })}

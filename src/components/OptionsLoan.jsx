@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 
 function OptionsLoan(props) {
 
-  // DEPOIS QUE INSERI OS PROPTYPES A PAGINA WEB FICOU LENTA
-
   const options = [
     { text: "Do you want to apply for a loan?", handler: props.actionProvider.handleOptionApplyLoan, id: 1},
     { text: "Loan conditions", handler: props.actionProvider.handleOptionConditionsLoan, id: 2},

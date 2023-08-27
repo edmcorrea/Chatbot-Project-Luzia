@@ -6,6 +6,8 @@ function Provider({ children }) {
   const PasswordChars = 8;
   const UsernameChars = 5;
   const [loginStatus, setLoginStatus] = useState(false);
+  const [firstContact, setFirstContact] = useState(false);
+
   const [Data, setData] = useState({
     Username: '',
     Password: '',
@@ -22,6 +24,8 @@ function Provider({ children }) {
     setData,
     loginStatus,
     setLoginStatus,
+    firstContact,
+    setFirstContact,
     isLoginValid,
   }), [
     Data,
