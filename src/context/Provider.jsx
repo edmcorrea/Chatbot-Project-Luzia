@@ -13,6 +13,8 @@ function Provider({ children }) {
     Username: '',
     Password: '',
   });
+
+  console.log('dataprovider', Data);
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const isLoginValid = useCallback((element) => {

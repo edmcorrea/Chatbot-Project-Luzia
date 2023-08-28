@@ -1,4 +1,4 @@
-function OptionHelpLoan() {
+function HelpLoanOption() {
 
   return (
     <div>
@@ -18,4 +18,4 @@ function OptionHelpLoan() {
   )
 }
 
-export default OptionHelpLoan;
+export default HelpLoanOption;

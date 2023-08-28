@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function OptionsLoanAnyMore(props) {
+function LoanAnyMoreOptions(props) {
 
   const options = [
     { text: "Return to loan options ", handler: props.actionProvider.handleLoanOption, id: 1},
@@ -22,9 +22,9 @@ function OptionsLoanAnyMore(props) {
   )
 }
 
-export default OptionsLoanAnyMore;
+export default LoanAnyMoreOptions;
 
-OptionsLoanAnyMore.propTypes = {
+LoanAnyMoreOptions.propTypes = {
   actionProvider: PropTypes.shape({
     handleLoanOption: PropTypes.func.isRequired,
     handleGoodbyeOption: PropTypes.func.isRequired,

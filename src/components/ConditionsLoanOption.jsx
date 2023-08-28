@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Context from "../context/Context";
 
-function OptionConditionsLoan() {
+function ConditionsLoanOption() {
   const { Data } = useContext(Context);
   return (
     <div>
@@ -13,4 +13,4 @@ function OptionConditionsLoan() {
   )
 }
 
-export default OptionConditionsLoan;
+export default ConditionsLoanOption;

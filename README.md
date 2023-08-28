@@ -1,6 +1,6 @@
 # React + Vite
 
-- Css `Fazer o css da página`
+<!-- - Css `Fazer o css da página` -->
 - Construir o `README`
 - Correção do new date() `utilizar a ideia do .lenght para alimentar o cvsData`
 - corrigir os nomes das funções em ingles `ex.: OptionApplyLoan >> ApplyLoanOption`
@@ -8,6 +8,7 @@
 - refatorar o código: `action provider muito grande`
 - Collapse: `implementar uma função para esconder o chatbot`
 -implement localStorage config state
+- corrigir o setData(username:'' e password:'') em `handleGoodbyeOption`
 
 
 

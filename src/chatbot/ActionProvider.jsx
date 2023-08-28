@@ -3,9 +3,9 @@ import Context from '../context/Context';
 import PropTypes from 'prop-types';
 import { createClientMessage } from 'react-chatbot-kit';
 import { CSVLink } from 'react-csv';
-import OptionHelpLoan from '../components/OptionHelpLoan';
-import OptionApplyLoan from '../components/OptionApplyLoan';
-import OptionConditionsLoan from '../components/OptionConditionsLoan';
+import HelpLoanOption from '../components/HelpLoanOption';
+import ApplyLoanOption from '../components/ApplyLoanOption';
+import ConditionsLoanOption from '../components/ConditionsLoanOption';
 import HandleGoodByee from '../components/handleGoodBye';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
@@ -99,11 +99,11 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleOptionApplyLoan = () => {
+  const handleApplyLoanOption = () => {
     const clientMessage = createClientMessage('Do you want to apply for a loan?');
 
     const botMessage = createChatBotMessage(
-      <OptionApplyLoan />
+      <ApplyLoanOption />
     );
 
     setState((prev) => ({
@@ -112,11 +112,11 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleOptionConditionsLoan = () => {
+  const handleConditionsLoanOption = () => {
     const clientMessage = createClientMessage('Loan conditions');
 
     const botMessage = createChatBotMessage(
-      <OptionConditionsLoan />
+      <ConditionsLoanOption />
     );
 
     setState((prev) => ({
@@ -125,11 +125,11 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleOptionHelpLoan = () => {
+  const handleHelpLoanOption = () => {
     const clientMessage = createClientMessage('Help');
 
     const botMessage = createChatBotMessage(
-      <OptionHelpLoan />
+      <HelpLoanOption />
     );
 
     setState((prev) => ({
@@ -158,7 +158,6 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Goodbye');
     setLoginStatus(false);
     setFirstContact(false);
-    setData({ Username: '', Password: '' });
     const transformedData = transformData(messages);
     const botMessage = createChatBotMessage(<>
       <HandleGoodByee/>
@@ -168,6 +167,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
         </li>
       </ul>
     </>);
+    
+    setData({ Username: '', Password: '' });
 
     setState((prev) => ({
       ...prev,
@@ -196,9 +197,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleLoan,
             handleLoanOption,
             handleLoanAnyMore,
-            handleOptionApplyLoan,
-            handleOptionConditionsLoan,
-            handleOptionHelpLoan,
+            handleApplyLoanOption,
+            handleConditionsLoanOption,
+            handleHelpLoanOption,
             handleGoodbye,
             handleGoodbyeOption,
             handleNoAnswer

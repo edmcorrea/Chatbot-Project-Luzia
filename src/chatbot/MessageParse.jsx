@@ -7,6 +7,9 @@ const MessageParser = ({ children, actions }) => {
   const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid, cvsData, setCvsData, transformData } = useContext(Context);
   const { Username, Password } = Data;
 
+  console.log('dataMESSAGE', Data);
+
+
   const {props : {state: { messages }}} = children;
   // console.log(messages);
 
@@ -23,9 +26,9 @@ const MessageParser = ({ children, actions }) => {
   
   const parse = async (message) => {
     const keywords = ['hello', 'goodbye', 'good', 'i want'];
-    message = message.toLowerCase();
     
     if(!firstContact) {
+      message = message.toLowerCase();
       if (keywords.some(keyword => message.includes(keyword))) {
         setFirstContact(true);
         return actions.handleUsername();
@@ -33,7 +36,7 @@ const MessageParser = ({ children, actions }) => {
       return actions.handleKeyword();
     }
 
-      if(!loginStatus) {
+    if(!loginStatus) {
       if(isLoginValid(message) && !Username) {
         setData((prevData) => ({
           ...prevData,
@@ -57,6 +60,8 @@ const MessageParser = ({ children, actions }) => {
       }
     }
 
+    message = message.toLowerCase();
+
     if (message.includes('loan')) {
       return actions.handleLoan();
     }
@@ -64,9 +69,9 @@ const MessageParser = ({ children, actions }) => {
     if(loginStatus && message.includes('goodbye')) {
       setLoginStatus(false);
       setFirstContact(false);
-      setData({ Username: '', Password: '' })
       const transformedData = transformData(messages);
-      return actions.handleGoodbye(transformedData);
+      actions.handleGoodbye(transformedData);
+      setData({ Username: '', Password: '' });
     } else {
       return actions.handleNoAnswer();
       
