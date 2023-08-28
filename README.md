@@ -1,5 +1,7 @@
 # Chatbot Project - Lexart Labs
 
+## Luzia Bot
+
 <!-- - Css `Fazer o css da página` -->
 <!-- - Construir o `README` -->
 - Correção do new date() `utilizar a ideia do .lenght para alimentar o cvsData`
@@ -13,7 +15,7 @@
 - desenvolver os `testes`
 
 
-<!-- Insert Image -->
+<!-- Insert Gif -->
 
 
 This is my solution for designing a chatbot (Luzia) with interactive features and user validation functionality. Luzia was designed to deliver personalized messages to each user. In addition, she has specific knowledge related to loan.
@@ -23,12 +25,12 @@ This is my solution for designing a chatbot (Luzia) with interactive features an
 ## Technologies Used:
 ---
 
-- Frontend: Vite + React.js
-- Other Libraries: React-Hooks, React-Chatbot-Kit, React-CSV, Jest, React-Testing-Library (RTL).
+- Frontend: **Vite + React.js**
+- Other Libraries: **React-Hooks, React-Chatbot-Kit, React-CSV, Jest, React-Testing-Library (RTL).**
 
 <br>
 
-## Luzia Bot - Creation process:
+## Creation process:
 ---
 
 During the process of creating the project, some steps were taken to meet the main objectives and needs proposed in the challenge. The following story recounts the development of the project, from the initial understanding to the end of the project.
@@ -54,7 +56,7 @@ After receiving the Full Stack Developer Review challenge, a thorough reading of
 
 <br>
 
-## Luzia Bot - Features
+## Features
 ---
 - `User Input`: Users need to login to your account using your name and password.
 
@@ -72,7 +74,7 @@ After receiving the Full Stack Developer Review challenge, a thorough reading of
 
 <br>
 
-## Luzia Bot - Getting Started
+## Getting Started
 ---
 
 ### To run the project locally:
@@ -82,6 +84,17 @@ After receiving the Full Stack Developer Review challenge, a thorough reading of
 3. Install the required dependencies using `npm install`.
 4. Start the application using `npm run dev`.
 5. O projeto estará sendo executado em `http://localhost:5173/`.
+
+<br>
+
+## How to Use
+---
+
+1. Say terms like `"Hello", "Goodbye", "Good", "Good Morning", "Good Afternoon", "Good Night", "I want ..."` to initiate a conversation.
+2. Enter a `Username` (up to 5 characters) and `Password` (up to 8 characters) to continue the conversation.
+3. Engage in a conversation with the chatbot and explore the available service options. (you can have access to a lot of information and reference links).
+4. When you want to end the conversation, `type "Goodbye"`.
+5. Chat history will be `available automatically` after saying "goodbye".
 
 <br>
 
