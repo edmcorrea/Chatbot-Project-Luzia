@@ -18,7 +18,19 @@ function Provider({ children }) {
   const isLoginValid = useCallback((element) => {
     if(!Data.Username) return element.length >= UsernameChars;
     else return element.length >= PasswordChars;
-  })
+  });
+
+  function transformData(inputData) {
+    const outputData = [["date/hour", "type", "message"]];
+    
+    inputData.forEach(item => {
+      const date = new Date();
+      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      outputData.push([formattedDate, item.type, item.message]);
+    });
+
+    return outputData;
+  }
 
   const context = useMemo(() => ({
     Data,
@@ -30,6 +42,7 @@ function Provider({ children }) {
     cvsData,
     setCvsData,
     isLoginValid,
+    transformData,
   }), [
     Data,
     loginStatus,

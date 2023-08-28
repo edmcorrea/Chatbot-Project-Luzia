@@ -8,7 +8,7 @@ function OptionsLoanAnyMore(props) {
   ];
 
   return (
-    <>
+    <div className="options-btn">
       {options.map((option) => (
         <button
           key={option.id}
@@ -18,7 +18,7 @@ function OptionsLoanAnyMore(props) {
           {option.text}
         </button>
       ))}
-    </>
+    </div>
   )
 }
 

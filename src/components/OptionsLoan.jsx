@@ -9,7 +9,7 @@ function OptionsLoan(props) {
   ];
 
   return (
-    <>
+    <div className="options-btn">
       {options.map((option) => (
         <button
           key={option.id}
@@ -22,7 +22,7 @@ function OptionsLoan(props) {
           {option.text}
         </button>
       ))}
-    </>
+    </div>
   )
 }
 

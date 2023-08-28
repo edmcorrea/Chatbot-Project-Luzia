@@ -1,5 +1,18 @@
 # React + Vite
 
+- Css `Fazer o css da página`
+- Construir o `README`
+- Correção do new date() `utilizar a ideia do .lenght para alimentar o cvsData`
+- corrigir os nomes das funções em ingles `ex.: OptionApplyLoan >> ApplyLoanOption`
+- limpar comentarios e consoles: ``
+- refatorar o código: `action provider muito grande`
+- Collapse: `implementar uma função para esconder o chatbot`
+-implement localStorage config state
+
+
+
+
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
@@ -10,3 +23,4 @@ Currently, two official plugins are available:
 ## External Documentation
 
 https://fredrikoseberg.github.io/react-chatbot-kit-docs/
+https://www.npmjs.com/package/react-csv

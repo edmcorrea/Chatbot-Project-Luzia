@@ -3,10 +3,17 @@ import Context from '../context/Context';
 import PropTypes from 'prop-types';
 import { createClientMessage } from 'react-chatbot-kit';
 import { CSVLink } from 'react-csv';
+import OptionHelpLoan from '../components/OptionHelpLoan';
+import OptionApplyLoan from '../components/OptionApplyLoan';
+import OptionConditionsLoan from '../components/OptionConditionsLoan';
+import HandleGoodByee from '../components/handleGoodBye';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
-  const { Data, setLoginStatus,setFirstContact, setData } = useContext(Context);
+  const { Data, setLoginStatus,setFirstContact, setData, transformData } = useContext(Context);
   const { Username } = Data;
+  const {props : {state: { messages }}} = children.props.children;
+  console.log(messages);
+
 
   const handleKeyword = () => {
     const botMessage = createChatBotMessage("I can't understand what you say. To start the conversation, please say 'Hello', 'Good Morning', 'Good Afternoon', 'I want' or 'Goodbye'");
@@ -96,15 +103,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Do you want to apply for a loan?');
 
     const botMessage = createChatBotMessage(
-      `Of course ${Username}, I'll be glad to assist you with information about loans! Understanding your financial options is important. Before we proceed, I suggest you take a look at this comprehensive guide on 'How to Choose the Right Loan for You.' It will provide valuable insights to help you make an informed decision.`,
-    );
-    const botMessage1 = createChatBotMessage(
-      <a href="https://www.investopedia.com/articles/personal-finance/010516/how-apply-personal-loan.asp" target="_blank" rel="noreferrer">How to Apply for a Personal Loan</a>
+      <OptionApplyLoan />
     );
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, clientMessage, botMessage, botMessage1],
+      messages: [...prev.messages, clientMessage, botMessage],
     }));
   };
 
@@ -112,13 +116,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Loan conditions');
 
     const botMessage = createChatBotMessage(
-      `Of course ${Username}, I am here to provide you with detailed information about loan conditions. The terms of a loan can vary depending on the type of loan you are considering and the financial institution offering it. Conditions typically include information such as interest rate, payment term, loan amount, and credit requirements. To better understand the specific conditions, I recommend you visit the page below:`,
+      <OptionConditionsLoan />
     );
-    const botMessage1 = createChatBotMessage(<a href="https://www.investopedia.com/loan-terms-5075341" target="_blank" rel="noreferrer">Loan Conditions</a>);
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, clientMessage, botMessage, botMessage1],
+      messages: [...prev.messages, clientMessage, botMessage],
     }));
   };
 
@@ -126,27 +129,28 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Help');
 
     const botMessage = createChatBotMessage(
-      "Other ways we can help you:",
+      <OptionHelpLoan />
     );
-    const botMessage1 = createChatBotMessage(<a href="https://www.investopedia.com/terms/c/correspondent-bank.asp" target="_blank" rel="noreferrer">Correspondent Bank: Definition and How It Works</a>);
-    const botMessage2 = createChatBotMessage(<a href="https://www.investopedia.com/articles/personal-finance/111715/when-are-personal-loans-good-idea.asp" target="_blank" rel="noreferrer">When Are Personal Loans a Good Idea?</a>);
-
-    const botMessage3 = createChatBotMessage(<a href="https://www.bankrate.com/loans/personal-loans/loan-borrower-fears/" target="_blank" rel="noreferrer">Scared to debt: 5 questions that loan borrowers fear</a>);
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, clientMessage, botMessage, botMessage1, botMessage2, botMessage3],
+      messages: [...prev.messages, clientMessage, botMessage],
     }));
   };
 
   const handleGoodbye = (transformedData) => {
-    const botMessage = createChatBotMessage(
-      `Okay ${Username} . For your ease, we've archived our entire conversation in the csv file below. Don't forget to download it, okay? Goodbye!`);
-      const botMessage1 = createChatBotMessage(<CSVLink data={transformedData}>Download me</CSVLink>);
+    const botMessage = createChatBotMessage(<>
+      <HandleGoodByee />
+      <ul>
+        <li>
+          <CSVLink data={transformedData}>Download me</CSVLink>
+        </li>
+      </ul>
+    </>);
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage, botMessage1],
+      messages: [...prev.messages, botMessage],
     }));
   };
 
@@ -154,9 +158,16 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Goodbye');
     setLoginStatus(false);
     setFirstContact(false);
-    setData({ Username: '', Password: '' })
-    const botMessage = createChatBotMessage(
-      `Bye ${Username}! If you have further questions, please don't hesitate to ask.`);
+    setData({ Username: '', Password: '' });
+    const transformedData = transformData(messages);
+    const botMessage = createChatBotMessage(<>
+      <HandleGoodByee/>
+      <ul>
+        <li>
+          <CSVLink data={transformedData}>Download me</CSVLink>
+        </li>
+      </ul>
+    </>);
 
     setState((prev) => ({
       ...prev,
@@ -203,5 +214,15 @@ export default ActionProvider;
 ActionProvider.propTypes = {
   createChatBotMessage: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
-  children: PropTypes.shape({}).isRequired,
+  children: PropTypes.shape({
+    props: PropTypes.shape({
+      children: PropTypes.shape({
+        props: PropTypes.shape({
+          state: PropTypes.shape({
+            messages: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+          }).isRequired,
+        }).isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
 };

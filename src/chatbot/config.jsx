@@ -4,6 +4,7 @@ import OptionsLoanAnyMore from '../components/OptionsLoanAnyMore';
 
 const config = {
   initialMessages: [createChatBotMessage(`Hi! My name is Luzia. Let's talk!`)],
+  // header: () => <div style={{ backgroundColor: 'red', padding: "5px", borderRadius: "3px" }}>This is the header</div>,
   botName: 'Luzia',
   widgets: [
     {

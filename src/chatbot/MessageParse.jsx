@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
 
 const MessageParser = ({ children, actions }) => {
-  const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid, cvsData, setCvsData } = useContext(Context);
+  const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid, cvsData, setCvsData, transformData } = useContext(Context);
   const { Username, Password } = Data;
 
   const {props : {state: { messages }}} = children;
@@ -20,18 +20,6 @@ const MessageParser = ({ children, actions }) => {
   //   ]);
   //   console.log(cvsData);
   // }, [messages]);
-  function transformData(inputData) {
-    const outputData = [["date/hour", "type", "message"]];
-    
-    inputData.forEach(item => {
-      const date = new Date();
-      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-      outputData.push([formattedDate, item.type, item.message]);
-    });
-
-    return outputData;
-  }
-  
   
   const parse = async (message) => {
     const keywords = ['hello', 'goodbye', 'good', 'i want'];
@@ -45,11 +33,7 @@ const MessageParser = ({ children, actions }) => {
       return actions.handleKeyword();
     }
 
-    // implementation future: condition that the user say something that the chatbot dont know
-
-    // DEPOIS QUE INSERI OS PROPTYPES A PAGINA WEB FICOU LENTA
-
-    if(!loginStatus) {
+      if(!loginStatus) {
       if(isLoginValid(message) && !Username) {
         setData((prevData) => ({
           ...prevData,
@@ -81,7 +65,7 @@ const MessageParser = ({ children, actions }) => {
       setLoginStatus(false);
       setFirstContact(false);
       setData({ Username: '', Password: '' })
-      const transformedData = transformData(messages)
+      const transformedData = transformData(messages);
       return actions.handleGoodbye(transformedData);
     } else {
       return actions.handleNoAnswer();
@@ -103,8 +87,6 @@ const MessageParser = ({ children, actions }) => {
 
 export default MessageParser;
 
-
-// DEPOIS QUE INSERI OS PROPTYPES A PAGINA WEB FICOU LENTA
 MessageParser.propTypes = {
   children: PropTypes.shape({
     props: PropTypes.shape({
