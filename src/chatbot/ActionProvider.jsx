@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 import PropTypes from 'prop-types';
 import { createClientMessage } from 'react-chatbot-kit';
+import { CSVLink } from 'react-csv';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const { Data, setLoginStatus,setFirstContact, setData } = useContext(Context);
@@ -138,13 +139,14 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleGoodbye = () => {
+  const handleGoodbye = (transformedData) => {
     const botMessage = createChatBotMessage(
-      `Bye ${Username}! If you have further questions, please don't hesitate to ask.`);
+      `Okay ${Username} . For your ease, we've archived our entire conversation in the csv file below. Don't forget to download it, okay? Goodbye!`);
+      const botMessage1 = createChatBotMessage(<CSVLink data={transformedData}>Download me</CSVLink>);
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage],
+      messages: [...prev.messages, botMessage, botMessage1],
     }));
   };
 

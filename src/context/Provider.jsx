@@ -7,6 +7,7 @@ function Provider({ children }) {
   const UsernameChars = 5;
   const [loginStatus, setLoginStatus] = useState(false);
   const [firstContact, setFirstContact] = useState(false);
+  const [cvsData, setCvsData] = useState([["date/hour", "type", "message"]]);
 
   const [Data, setData] = useState({
     Username: '',
@@ -26,11 +27,15 @@ function Provider({ children }) {
     setLoginStatus,
     firstContact,
     setFirstContact,
+    cvsData,
+    setCvsData,
     isLoginValid,
   }), [
     Data,
     loginStatus,
     isLoginValid,
+    firstContact,
+    cvsData,
   ]);
 
   return <Context.Provider value={ context }>{children}</Context.Provider>

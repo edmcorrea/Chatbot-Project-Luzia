@@ -1,27 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
 
 const MessageParser = ({ children, actions }) => {
-  const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid } = useContext(Context);
+  const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid, cvsData, setCvsData } = useContext(Context);
   const { Username, Password } = Data;
 
   const {props : {state: { messages }}} = children;
-  console.log(messages);
+  // console.log(messages);
 
-  // async function StartConversation (keywords) {
-  //   for (const keyword of keywords) {
-  //     await messages.forEach( async (msg) => {
-  //       console.log('entrei1', msg.type === 'user', !msg.message.includes(keyword));
-  
-  //       if (msg.type === 'user' && !msg.message.includes(keyword)) {
-  //         console.log('entrei2');
-  //         return actions.handleKeyword();
-  //       }
-  //     });
-  //   }
-  // }
+  // useEffect(()=> {
+  //   const msg = messages.slice(-1)
+  //   const date = new Date();
+  //   const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  //   setCvsData((prevData) => [
+  //     ...prevData,
+  //     [formattedDate, msg.type, msg.message]
+  //   ]);
+  //   console.log(cvsData);
+  // }, [messages]);
+  function transformData(inputData) {
+    const outputData = [["date/hour", "type", "message"]];
+    
+    inputData.forEach(item => {
+      const date = new Date();
+      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      outputData.push([formattedDate, item.type, item.message]);
+    });
+
+    return outputData;
+  }
   
   
   const parse = async (message) => {
@@ -72,7 +81,8 @@ const MessageParser = ({ children, actions }) => {
       setLoginStatus(false);
       setFirstContact(false);
       setData({ Username: '', Password: '' })
-      return actions.handleGoodbye();
+      const transformedData = transformData(messages)
+      return actions.handleGoodbye(transformedData);
     } else {
       return actions.handleNoAnswer();
       
