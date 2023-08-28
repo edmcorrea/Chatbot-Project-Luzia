@@ -5,7 +5,7 @@
 <!-- - Css `Fazer o css da página` -->
 <!-- - Construir o `README` -->
 - Correção do new date() `utilizar a ideia do .lenght para alimentar o cvsData`
-- hospedar no vercel
+<!-- - hospedar no vercel -->
 <!-- - corrigir os nomes das funções em ingles `ex.: OptionApplyLoan >> ApplyLoanOption` -->
 - limpar comentarios e consoles: ``
 - refatorar o código: `action provider muito grande`
@@ -100,5 +100,6 @@ After receiving the Full Stack Developer Review challenge, a thorough reading of
 
 ## External Documentation
 
+-Vite + React: `https://vitejs.dev/guide/`
 - React-Chatbot-Kit: `https://fredrikoseberg.github.io/react-chatbot-kit-docs/`
 - React CSV: `https://www.npmjs.com/package/react-csv`
