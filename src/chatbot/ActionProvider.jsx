@@ -10,7 +10,6 @@ import HandleGoodByee from '../components/handleGoodBye';
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const { Data } = useContext(Context);
   const { Username } = Data;
-  // const {props : {state: { messages }}} = children.props.children;
   
   const handleKeyword = () => {
     const botMessage = createChatBotMessage("I can't understand what you say. To start the conversation, please say 'Hello', 'Good Morning', 'Good Afternoon', 'I want' or 'Goodbye'");

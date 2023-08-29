@@ -7,14 +7,12 @@ function Provider({ children }) {
   const UsernameChars = 5;
   const [loginStatus, setLoginStatus] = useState(false);
   const [firstContact, setFirstContact] = useState(false);
-  // const [cvsData, setCvsData] = useState([["date/hour", "type", "message"]]);
 
   const [Data, setData] = useState({
     Username: '',
     Password: '',
   });
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const isLoginValid = useCallback((element) => {
     if(!Data.Username) return element.length >= UsernameChars;
     else return element.length >= PasswordChars;
@@ -22,7 +20,6 @@ function Provider({ children }) {
 
   function transformData(inputData) {
     const cvsData = JSON.parse(localStorage.getItem('csv-message'));
-    console.log('inputData', inputData);
     const valor = inputData.length - cvsData.length +1;
     
     if(valor > 0 ) {
@@ -38,7 +35,6 @@ function Provider({ children }) {
         localStorage.setItem('csv-message', JSON.stringify(cvsData));
       });
     }
-  console.log('cvsData', cvsData);
   }
 
   const context = useMemo(() => ({

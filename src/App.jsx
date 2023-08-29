@@ -8,21 +8,11 @@ import './App.css'
 
 function App() {
 
-  // const saveMessages = (messages) => {
-  //   localStorage.setItem('chat_messages', JSON.stringify(messages));
-  // };
-
-  // const loadMessages = () => {
-  //   const messages = JSON.parse(localStorage.getItem('chat_messages'));
-  //   return messages;
-  // };
-
   return (
     <>
       <Chatbot
         config={config}
         actionProvider={ActionProvider}
-        // messageHistory={loadMessages()}
         messageParser={MessageParser}
       />
     </>

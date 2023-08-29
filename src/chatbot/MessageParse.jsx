@@ -9,11 +9,7 @@ const MessageParser = ({ children, actions }) => {
 
   const {props : {state: { messages }}} = children;
 
-  //   const saveMessages = (messages) => {
-  //   localStorage.setItem('chat_messages', JSON.stringify(messages));
-  // };
-
-    const saveCVS = () => {
+  const saveCVS = () => {
     localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
   };
 
@@ -97,7 +93,6 @@ MessageParser.propTypes = {
     }).isRequired,
   }).isRequired,
   actions: PropTypes.shape({
-    // handleOptionHelpLoan: PropTypes.func.isRequired,
     handleKeyword: PropTypes.func.isRequired,
     handleUsername: PropTypes.func.isRequired,
     handlePassword: PropTypes.func.isRequired,
