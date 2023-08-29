@@ -5,13 +5,46 @@ import './App.css'
 import MessageParser from './chatbot/MessageParse.jsx';
 import ActionProvider from './chatbot/ActionProvider.jsx';
 import './App.css'
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import luziaphoto from './assets/magalu.jpg';
 import balao from './assets/balao.png';
+import Context from './context/Context.jsx';
 
 
 function App() {
+  const { setData, setLoginStatus, setFirstContact } = useContext(Context);
   const [show, setShow] = useState(false);
+
+  const loadMessages = () => {
+    const messages = JSON.parse(localStorage.getItem('chat_messages'));
+    return messages;
+  };
+
+  
+  const dataUser = () => {
+    const messages = JSON.parse(localStorage.getItem('user-data'));
+    if(!messages) {
+      return localStorage.setItem('user-data', JSON.stringify({Username: '', Password: ''}));
+    }
+    return messages;
+  };
+
+  useEffect(() => {
+    console.log(show);
+    if(!show) {
+      localStorage.setItem('chat_messages', JSON.stringify([{"message":"Hi! My name is Luzia. Let's talk!","type":"bot","id":1450707463862,"loading":false}]));
+      localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
+      localStorage.setItem('user-data', JSON.stringify({Username: '', Password: ''}));
+      setLoginStatus(false);
+      setFirstContact(false);
+      setData({Username: '', Password: ''});
+    }
+  }, [show]);
+
+  useEffect(() => {
+    setData(dataUser());
+    localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
+  }, [])
 
   return (
     <div className='app'>
@@ -45,6 +78,8 @@ function App() {
           config={config}
           actionProvider={ActionProvider}
           messageParser={MessageParser}
+          messageHistory={loadMessages()}
+          // saveMessages={saveMessages}
           />
         )
       }

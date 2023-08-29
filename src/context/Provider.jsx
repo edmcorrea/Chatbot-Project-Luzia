@@ -20,6 +20,9 @@ function Provider({ children }) {
 
   function transformData(inputData) {
     const cvsData = JSON.parse(localStorage.getItem('csv-message'));
+    console.log('inputData', inputData);
+    console.log('cvsData', cvsData);
+
     const valor = inputData.length - cvsData.length +1;
     
     if(valor > 0 ) {

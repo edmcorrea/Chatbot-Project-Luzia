@@ -9,13 +9,9 @@ const MessageParser = ({ children, actions }) => {
 
   const {props : {state: { messages }}} = children;
 
-  const saveCVS = () => {
-    localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
-  };
-
-  useEffect(()=> {
-    saveCVS();
-  }, [])
+  useEffect(() => {
+    localStorage.setItem('chat_messages', JSON.stringify(messages));
+  }, [messages])
 
   const parse = async (message) => {
     const keywords = ['hello', 'goodbye', 'good', 'i want'];
@@ -36,6 +32,7 @@ const MessageParser = ({ children, actions }) => {
           ...prevData,
           Username: message,
         }))
+        localStorage.setItem('user-data', JSON.stringify({ ...Data, Username: message }));
         return actions.handlePassword();
       }
       else if(!isLoginValid(message) && !Username) {
@@ -49,8 +46,9 @@ const MessageParser = ({ children, actions }) => {
           ...prevData,
           Password: message,
         }))
+        localStorage.setItem('user-data', JSON.stringify({ ...Data, Password: message }));
         setLoginStatus(true);
-        return actions.handleLoginSucess()
+        return actions.handleLoginSucess();
       }
     }
 

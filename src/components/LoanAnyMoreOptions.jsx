@@ -6,7 +6,12 @@ function LoanAnyMoreOptions(props) {
   const {state: { messages }} = props;
   const {  transformData } = useContext(Context);
 
+  // const saveMessages = (messages) => {
+  //   localStorage.setItem('chat_messages', JSON.stringify(messages));
+  // };
+  
   useEffect(()=> {
+    // saveMessages(messages);
     transformData(messages);
   }, [])
 

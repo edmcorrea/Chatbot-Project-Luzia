@@ -3,19 +3,27 @@ import Context from "../context/Context";
 import { CSVLink } from "react-csv";
 
 function HandleGoodByee() {
-  const { setData, setLoginStatus, setFirstContact } = useContext(Context);
+  const { setData, loginStatus, setLoginStatus, setFirstContact } = useContext(Context);
 
-  const cvsData = JSON.parse(localStorage.getItem('csv-message'));
+  let csvData = JSON.parse(localStorage.getItem('csv-message'));
 
+  const date = new Date();
+  const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`; 
+  csvData.push([formattedDate, 'user', 'goodbye'])
+
+  useEffect(() => {
+    console.log('hello', csvData);
+    if(!loginStatus) {
+      localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
+    }
+    localStorage.setItem('user-data', JSON.stringify({Username: '', Password: ''}));
+  }, [loginStatus])
+  
   useEffect(()=> {
     setLoginStatus(false);
     setFirstContact(false);
     setData({ Username: '', Password: '' });
   }, []);
-  const date = new Date();
-        const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-  
-  cvsData.push([formattedDate, 'user', 'goodbye'])
 
   return (
     <div>
@@ -23,7 +31,7 @@ function HandleGoodByee() {
       <h5>Goodbye!</h5>
       <ul>
         <li>
-          <CSVLink data={cvsData}>Download ME</CSVLink>
+          <CSVLink data={csvData}>Download ME</CSVLink>
         </li>
       </ul>
     </div>
