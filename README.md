@@ -98,6 +98,6 @@ After receiving the Full Stack Developer Review challenge, a thorough reading of
 
 ## External Documentation
 
--Vite + React: `https://vitejs.dev/guide/`
+- Vite + React: `https://vitejs.dev/guide/`
 - React-Chatbot-Kit: `https://fredrikoseberg.github.io/react-chatbot-kit-docs/`
 - React CSV: `https://www.npmjs.com/package/react-csv`
