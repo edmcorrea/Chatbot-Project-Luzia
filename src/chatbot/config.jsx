@@ -1,6 +1,7 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
 import OptionsLoan from '../components/LoanOptions';
 import OptionsLoanAnyMore from '../components/LoanAnyMoreOptions';
+import LuziaBotAvatar from '../components/ChatbotAvatarBot';
 
 const config = {
   initialMessages: [createChatBotMessage(`Hi! My name is Luzia. Let's talk!`)],
@@ -19,6 +20,9 @@ const config = {
     botMessageBox: {
       backgroundColor: '#376B7E',
     },
+  },
+  customComponents: {
+    botAvatar: (props) => <LuziaBotAvatar {...props} />,
   },
 };
 

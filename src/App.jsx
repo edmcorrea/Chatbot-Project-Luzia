@@ -79,7 +79,6 @@ function App() {
           actionProvider={ActionProvider}
           messageParser={MessageParser}
           messageHistory={loadMessages()}
-          // saveMessages={saveMessages}
           />
         )
       }
