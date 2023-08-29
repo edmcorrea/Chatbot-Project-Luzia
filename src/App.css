@@ -1,5 +1,32 @@
 * {
   font-size: 16px;
+  margin: 0;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.app-btn {
+  border-radius: 100%;
+  padding: 0;
+  border: none;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-shadow: 1px 2px 1px rgba(128, 128, 128, 0.664);
+}
+
+.app-img {
+  width: 80px;
+  border-radius: 100%;
+}
+
+.react-chatbot-kit-chat-container {
+  margin: 20px;
+  margin-left: 0;
 }
 
 .react-chatbot-kit-chat-header {

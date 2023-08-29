@@ -5,17 +5,39 @@ import './App.css'
 import MessageParser from './chatbot/MessageParse.jsx';
 import ActionProvider from './chatbot/ActionProvider.jsx';
 import './App.css'
+import { useState } from 'react';
+import luziaphoto from './assets/magalu.jpg'
 
 function App() {
+  const [show, setShow] = useState(false);
 
   return (
-    <>
-      <Chatbot
-        config={config}
-        actionProvider={ActionProvider}
-        messageParser={MessageParser}
-      />
-    </>
+    <div className='app'>
+      <section>
+        {!show && <p>{`Hello, Let's Talk!`}</p>}
+        <button
+          className="app-btn"
+          onClick={() => setShow(!show)}
+        >
+          <img
+            className="app-img"
+            src={luziaphoto}
+            alt="our-projects-gif"
+          />
+        </button>
+      </section>
+      {
+        show && (
+          <Chatbot
+          className='app-chatbot'
+          config={config}
+          actionProvider={ActionProvider}
+          messageParser={MessageParser}
+          />
+        )
+      }
+      
+    </div>
   )
 }
 
