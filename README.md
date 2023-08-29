@@ -1,9 +1,19 @@
 # Chatbot Project - Lexart Labs
 
-## Luzia Bot
+<div align="center">
 
-
-<!-- Insert Gif -->
+  ## Luzia Bot
+  
+  <div align="center">
+    <img width="700" height="400" src="src/assets/chatbotLuzia.gif">
+  </div>
+  
+  <br />
+  
+  <p align="center">
+    <a href="https://luzia-chatbot.vercel.app/"><strong>Navegue na versão demo web »</strong></a>
+  </p>
+</div>
 
 
 This is my solution for designing a chatbot (Luzia) with interactive features and user validation functionality. Luzia was designed to deliver personalized messages to each user. In addition, she has specific knowledge related to loan.
