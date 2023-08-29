@@ -1,22 +1,22 @@
 import { useContext, useEffect } from "react";
 import Context from "../context/Context";
 import { CSVLink } from "react-csv";
+import { getCSVMessagesLocalStorage, setCSVMessagesLocalStorage, setUserDataLocalStorage } from "../services/getterSetterLocalStorage";
 
 function HandleGoodByee() {
   const { setData, loginStatus, setLoginStatus, setFirstContact } = useContext(Context);
 
-  let csvData = JSON.parse(localStorage.getItem('csv-message'));
+  let csvData = getCSVMessagesLocalStorage();
 
   const date = new Date();
   const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`; 
   csvData.push([formattedDate, 'user', 'goodbye'])
 
   useEffect(() => {
-    console.log('hello', csvData);
     if(!loginStatus) {
-      localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
+      setCSVMessagesLocalStorage([["date/hour", "type", "message"]]);
     }
-    localStorage.setItem('user-data', JSON.stringify({Username: '', Password: ''}));
+    setUserDataLocalStorage({Username: '', Password: ''});
   }, [loginStatus])
   
   useEffect(()=> {

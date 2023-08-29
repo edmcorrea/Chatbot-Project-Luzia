@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
+import { setChatMessagesLocalStorage, setUserDataLocalStorage } from '../services/getterSetterLocalStorage';
 
 
 const MessageParser = ({ children, actions }) => {
@@ -10,7 +11,7 @@ const MessageParser = ({ children, actions }) => {
   const {props : {state: { messages }}} = children;
 
   useEffect(() => {
-    localStorage.setItem('chat_messages', JSON.stringify(messages));
+    setChatMessagesLocalStorage(messages);
   }, [messages])
 
   const parse = async (message) => {
@@ -32,7 +33,7 @@ const MessageParser = ({ children, actions }) => {
           ...prevData,
           Username: message,
         }))
-        localStorage.setItem('user-data', JSON.stringify({ ...Data, Username: message }));
+        setUserDataLocalStorage({ ...Data, Username: message });
         return actions.handlePassword();
       }
       else if(!isLoginValid(message) && !Username) {
@@ -46,7 +47,7 @@ const MessageParser = ({ children, actions }) => {
           ...prevData,
           Password: message,
         }))
-        localStorage.setItem('user-data', JSON.stringify({ ...Data, Password: message }));
+        setUserDataLocalStorage({ ...Data, Password: message })
         setLoginStatus(true);
         return actions.handleLoginSucess();
       }

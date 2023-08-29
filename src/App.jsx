@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 import luziaphoto from './assets/magalu.jpg';
 import balao from './assets/balao.png';
 import Context from './context/Context.jsx';
+import { getChatMessagesLocalStorage, getUserDataLocalStorage, setCSVMessagesLocalStorage, setChatMessagesLocalStorage, setUserDataLocalStorage } from './services/getterSetterLocalStorage.jsx';
 
 
 function App() {
@@ -16,25 +17,24 @@ function App() {
   const [show, setShow] = useState(false);
 
   const loadMessages = () => {
-    const messages = JSON.parse(localStorage.getItem('chat_messages'));
+    const messages = getChatMessagesLocalStorage();
     return messages;
   };
 
   
   const dataUser = () => {
-    const messages = JSON.parse(localStorage.getItem('user-data'));
+    const messages = getUserDataLocalStorage();
     if(!messages) {
-      return localStorage.setItem('user-data', JSON.stringify({Username: '', Password: ''}));
+      return setUserDataLocalStorage({Username: '', Password: ''});
     }
     return messages;
   };
 
   useEffect(() => {
-    console.log(show);
     if(!show) {
-      localStorage.setItem('chat_messages', JSON.stringify([{"message":"Hi! My name is Luzia. Let's talk!","type":"bot","id":1450707463862,"loading":false}]));
-      localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
-      localStorage.setItem('user-data', JSON.stringify({Username: '', Password: ''}));
+      setChatMessagesLocalStorage([{"message":"Hi! My name is Luzia. Let's talk!","type":"bot","id":1450707463862,"loading":false}]);
+      setCSVMessagesLocalStorage([["date/hour", "type", "message"]]);
+      setUserDataLocalStorage({Username: '', Password: ''});
       setLoginStatus(false);
       setFirstContact(false);
       setData({Username: '', Password: ''});
@@ -43,7 +43,7 @@ function App() {
 
   useEffect(() => {
     setData(dataUser());
-    localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
+    setCSVMessagesLocalStorage([["date/hour", "type", "message"]]);
   }, [])
 
   return (

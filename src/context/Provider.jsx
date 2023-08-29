@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useCallback, useMemo, useState } from 'react';
 import Context from './Context';
+import { getCSVMessagesLocalStorage, setCSVMessagesLocalStorage } from '../services/getterSetterLocalStorage';
 
 function Provider({ children }) {
   const PasswordChars = 8;
@@ -19,10 +20,7 @@ function Provider({ children }) {
   });
 
   function transformData(inputData) {
-    const cvsData = JSON.parse(localStorage.getItem('csv-message'));
-    console.log('inputData', inputData);
-    console.log('cvsData', cvsData);
-
+    const cvsData = getCSVMessagesLocalStorage();
     const valor = inputData.length - cvsData.length +1;
     
     if(valor > 0 ) {
@@ -35,7 +33,7 @@ function Provider({ children }) {
         } else {
           cvsData.push([formattedDate, item.type, item.message]);
         }
-        localStorage.setItem('csv-message', JSON.stringify(cvsData));
+        setCSVMessagesLocalStorage(cvsData);
       });
     }
   }
