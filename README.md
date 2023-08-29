@@ -14,6 +14,7 @@
 <!-- -implement localStorage config state -->
 <!-- - corrigir o setData(username:'' e password:'') em `handleGoodbyeOption` -->
 - desenvolver os `testes`
+- readme - falar dos tests
 
 
 <!-- Insert Gif -->

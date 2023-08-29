@@ -18,6 +18,10 @@
     "react-hooks": "^1.0.1"
   },
   "devDependencies": {
+    "@vitest/ui": "latest",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "13.5.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
@@ -25,6 +29,8 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "happy-dom": "latest",
+    "jsdom": "latest",
     "vite": "^4.4.5",
     "vitest": "^0.33.0"
   }

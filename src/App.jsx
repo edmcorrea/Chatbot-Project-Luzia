@@ -27,6 +27,7 @@ function App() {
         </div>
         }
         <button
+          data-testid="collapseBtn"
           className="app-btn"
           onClick={() => setShow(!show)}
         >
