@@ -6,7 +6,9 @@ import MessageParser from './chatbot/MessageParse.jsx';
 import ActionProvider from './chatbot/ActionProvider.jsx';
 import './App.css'
 import { useState } from 'react';
-import luziaphoto from './assets/magalu.jpg'
+import luziaphoto from './assets/magalu.jpg';
+import balao from './assets/balao.png';
+
 
 function App() {
   const [show, setShow] = useState(false);
@@ -14,7 +16,16 @@ function App() {
   return (
     <div className='app'>
       <section>
-        {!show && <p>{`Hello, Let's Talk!`}</p>}
+      {!show && 
+        <div className='letsTalk' >
+          <p className="app-text-letstalk">{`Hello! Let's Talk!`}</p>
+          <img
+            className="app-img-balao"
+            src={balao}
+            alt="app-img-balao"
+          />
+        </div>
+        }
         <button
           className="app-btn"
           onClick={() => setShow(!show)}
