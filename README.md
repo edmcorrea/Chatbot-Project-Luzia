@@ -77,8 +77,8 @@ After receiving the Full Stack Developer Review challenge, a thorough reading of
 
 ### To run the project locally:
 
-1. Clone this repository: `git clone git@github.com:edmcorrea/Lexart-Test-Chatbot.git`
-2. Navigate to the project directory: `cd luzia-chatbot/`
+1. Clone this repository: `git clone git@github.com:edmcorrea/Chatbot-Project-Luzia.git`
+2. Navigate to the project directory: `cd Chatbot-Project-Luzia/`
 3. Install the required dependencies using `npm install`.
 4. Start the application using `npm run dev`.
 5. O projeto estará sendo executado em `http://localhost:5173/`.
