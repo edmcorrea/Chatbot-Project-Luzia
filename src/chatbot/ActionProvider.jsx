@@ -2,19 +2,16 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 import PropTypes from 'prop-types';
 import { createClientMessage } from 'react-chatbot-kit';
-import { CSVLink } from 'react-csv';
 import HelpLoanOption from '../components/HelpLoanOption';
 import ApplyLoanOption from '../components/ApplyLoanOption';
 import ConditionsLoanOption from '../components/ConditionsLoanOption';
 import HandleGoodByee from '../components/handleGoodBye';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
-  const { Data, setLoginStatus,setFirstContact, setData, transformData } = useContext(Context);
+  const { Data } = useContext(Context);
   const { Username } = Data;
-  const {props : {state: { messages }}} = children.props.children;
-  console.log(messages);
-
-
+  // const {props : {state: { messages }}} = children.props.children;
+  
   const handleKeyword = () => {
     const botMessage = createChatBotMessage("I can't understand what you say. To start the conversation, please say 'Hello', 'Good Morning', 'Good Afternoon', 'I want' or 'Goodbye'");
 
@@ -103,7 +100,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Do you want to apply for a loan?');
 
     const botMessage = createChatBotMessage(
-      <ApplyLoanOption />
+      <ApplyLoanOption />, {
+        payload: `Of course ${Data.Username}, I'll be glad to assist you with information about loans! Understanding your financial options is important. Before we proceed, I suggest you take a look at this comprehensive guide on 'How to Choose the Right Loan for You.' It will provide valuable insights to help you make an informed decision: https://www.investopedia.com/articles/personal-finance/010516/how-apply-personal-loan.asp`}
     );
 
     setState((prev) => ({
@@ -116,7 +114,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Loan conditions');
 
     const botMessage = createChatBotMessage(
-      <ConditionsLoanOption />
+      <ConditionsLoanOption />, {
+        payload: `Of course ${Data.Username}, I am here to provide you with detailed information about loan conditions. The terms of a loan can vary depending on the type of loan you are considering and the financial institution offering it. Conditions typically include information such as interest rate, payment term, loan amount, and credit requirements. To better understand the specific conditions, I recommend you visit the page below: https://www.investopedia.com/loan-terms-5075341`}
     );
 
     setState((prev) => ({
@@ -129,7 +128,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const clientMessage = createClientMessage('Help');
 
     const botMessage = createChatBotMessage(
-      <HelpLoanOption />
+      <HelpLoanOption />, {
+        payload: 'Other ways we can help you: 1.Correspondent Bank: Definition and How It Works: https://www.investopedia.com/terms/c/correspondent-bank.asp 2.When Are Personal Loans a Good Idea?: https://www.investopedia.com/articles/personal-finance/111715/when-are-personal-loans-good-idea.asp 3.Scared to debt - 5 questions that loan borrowers fear: https://www.bankrate.com/loans/personal-loans/loan-borrower-fears/'}
     );
 
     setState((prev) => ({
@@ -138,15 +138,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleGoodbye = (transformedData) => {
-    const botMessage = createChatBotMessage(<>
-      <HandleGoodByee />
-      <ul>
-        <li>
-          <CSVLink data={transformedData}>Download me</CSVLink>
-        </li>
-      </ul>
-    </>);
+  const handleGoodbye = () => {
+    const botMessage = createChatBotMessage(
+      <HandleGoodByee />);
 
     setState((prev) => ({
       ...prev,
@@ -156,19 +150,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleGoodbyeOption = () => {
     const clientMessage = createClientMessage('Goodbye');
-    setLoginStatus(false);
-    setFirstContact(false);
-    const transformedData = transformData(messages);
-    const botMessage = createChatBotMessage(<>
-      <HandleGoodByee/>
-      <ul>
-        <li>
-          <CSVLink data={transformedData}>Download me</CSVLink>
-        </li>
-      </ul>
-    </>);
-    
-    setData({ Username: '', Password: '' });
+    const botMessage = createChatBotMessage(<HandleGoodByee/>);
 
     setState((prev) => ({
       ...prev,

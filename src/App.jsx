@@ -8,7 +8,7 @@ import './App.css'
 
 function App() {
 
-  // const saveMessages = (messages, HTMLString) => {
+  // const saveMessages = (messages) => {
   //   localStorage.setItem('chat_messages', JSON.stringify(messages));
   // };
 
@@ -24,10 +24,9 @@ function App() {
         actionProvider={ActionProvider}
         // messageHistory={loadMessages()}
         messageParser={MessageParser}
-        // saveMessages={saveMessages}
       />
     </>
   )
 }
 
-export default App
+export default App;

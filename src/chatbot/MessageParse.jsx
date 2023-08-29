@@ -1,31 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
 
 const MessageParser = ({ children, actions }) => {
-  const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid, cvsData, setCvsData, transformData } = useContext(Context);
+  const { loginStatus, setLoginStatus, setData, Data, firstContact, setFirstContact, isLoginValid, transformData } = useContext(Context);
   const { Username, Password } = Data;
 
-  console.log('dataMESSAGE', Data);
-
-
   const {props : {state: { messages }}} = children;
-  // console.log(messages);
 
-  // useEffect(()=> {
-  //   const msg = messages.slice(-1)
-  //   const date = new Date();
-  //   const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-  //   setCvsData((prevData) => [
-  //     ...prevData,
-  //     [formattedDate, msg.type, msg.message]
-  //   ]);
-  //   console.log(cvsData);
-  // }, [messages]);
-  
+  //   const saveMessages = (messages) => {
+  //   localStorage.setItem('chat_messages', JSON.stringify(messages));
+  // };
+
+    const saveCVS = () => {
+    localStorage.setItem('csv-message', JSON.stringify([["date/hour", "type", "message"]]));
+  };
+
+  useEffect(()=> {
+    saveCVS();
+  }, [])
+
   const parse = async (message) => {
     const keywords = ['hello', 'goodbye', 'good', 'i want'];
+    await transformData(messages);
     
     if(!firstContact) {
       message = message.toLowerCase();
@@ -67,15 +65,13 @@ const MessageParser = ({ children, actions }) => {
     }
 
     if(loginStatus && message.includes('goodbye')) {
-      setLoginStatus(false);
-      setFirstContact(false);
-      const transformedData = transformData(messages);
-      actions.handleGoodbye(transformedData);
-      setData({ Username: '', Password: '' });
+      
+
+      actions.handleGoodbye();
     } else {
       return actions.handleNoAnswer();
-      
     }
+    setData({ Username: '', Password: '' });
   };
 
   return (
@@ -101,7 +97,7 @@ MessageParser.propTypes = {
     }).isRequired,
   }).isRequired,
   actions: PropTypes.shape({
-    handleOptionHelpLoan: PropTypes.func.isRequired,
+    // handleOptionHelpLoan: PropTypes.func.isRequired,
     handleKeyword: PropTypes.func.isRequired,
     handleUsername: PropTypes.func.isRequired,
     handlePassword: PropTypes.func.isRequired,

@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
+import { useContext, useEffect } from 'react';
+import Context from '../context/Context';
 
 function LoanAnyMoreOptions(props) {
+  const {state: { messages }} = props;
+  const {  transformData } = useContext(Context);
+
+  useEffect(()=> {
+    transformData(messages);
+  }, [])
 
   const options = [
     { text: "Return to loan options ", handler: props.actionProvider.handleLoanOption, id: 1},
@@ -25,6 +33,11 @@ function LoanAnyMoreOptions(props) {
 export default LoanAnyMoreOptions;
 
 LoanAnyMoreOptions.propTypes = {
+  props: PropTypes.shape({
+    state: PropTypes.shape({
+      messages: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    }).isRequired,
+  }).isRequired,
   actionProvider: PropTypes.shape({
     handleLoanOption: PropTypes.func.isRequired,
     handleGoodbyeOption: PropTypes.func.isRequired,

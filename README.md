@@ -10,6 +10,7 @@
 - limpar comentarios e consoles: ``
 - refatorar o código: `action provider muito grande`
 - Collapse: `implementar uma função para esconder o chatbot`
+- Implementar o `localStorage.get` e `LocalStorage.set`
 -implement localStorage config state
 - corrigir o setData(username:'' e password:'') em `handleGoodbyeOption`
 - desenvolver os `testes`
