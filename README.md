@@ -11,7 +11,7 @@
   <br />
   
   <p align="center">
-    <a href="https://luzia-chatbot.vercel.app/"><strong>Navegue na versão demo web »</strong></a>
+    <a href="https://luzia-chatbot.vercel.app/"><strong>Browse the web demo version »</strong></a>
   </p>
 </div>
 
