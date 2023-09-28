@@ -1,4 +1,4 @@
-# Chatbot Project - Luzia Bot
+# Chatbot - Luzia Bot
 
 <div align="center">
 
