@@ -1,4 +1,4 @@
-# Chatbot Project - Lexart Labs
+# Chatbot Project - Luzia Bot
 
 <div align="center">
 
